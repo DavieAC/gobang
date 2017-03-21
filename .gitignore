@@ -1,0 +1,17 @@
+lass Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# WorkSpace Files#
+.classpath
+.project
+.settings/*
+target/*
+.DS_Store
+
+# .* #
+
