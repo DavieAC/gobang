@@ -11,17 +11,9 @@ public class ChessPageController {
     @RequestMapping("/goHTML")
     public String goHTMl(Model model) {
         
-        System.out.println("收到http请求");
+        System.out.println("这是B分支");
         
         return "index";
-    }
-    
-    @RequestMapping("/goJSP")
-    public String goJSP(Model model) {
-        
-        System.out.println("收到http请求");
-        
-        return "cloud";
     }
     
 }
