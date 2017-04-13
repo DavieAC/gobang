@@ -8,8 +8,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
 	default-autowire="byName">
     
-    <!-- 把这个包下面的所有包都扫描为bean -->
-	<context:component-scan base-package="com.jd.gobang.controllers" />
+    <!-- 把这个包下面的所有注解都扫描为bean -->
+	<context:component-scan base-package="com.jd.gobang.*" />
     
     <!-- 启用注解驱动, 默认注册几个bean, 主要包括: -->
     <!-- RequestMappingHandlerMapping 处理@RequestMapping 注解, 并将其注册到请求映射表中 -->
@@ -22,9 +22,13 @@
     <!-- 定义适配器 -->
 	<!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" /> -->  
 
+    <!-- 定义资源解析地址 -->
+    <mvc:resources mapping="/images/**" location="/WEB-INF/resources/images/"/>
+
     <!-- 定义视图解析器 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/pages/" />
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 

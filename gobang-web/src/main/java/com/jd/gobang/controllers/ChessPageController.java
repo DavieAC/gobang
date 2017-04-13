@@ -8,20 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = {"/index", "/", ""})
 public class ChessPageController {
 
-    @RequestMapping("/goHTML")
-    public String goHTMl(Model model) {
-        
-        System.out.println("收到http请求");
-        
-        return "index";
+    @RequestMapping("chessPage")
+    public String chessPage(Model model) {
+
+        return "chessPage";
     }
-    
-    @RequestMapping("/goJSP")
-    public String goJSP(Model model) {
-        
-        System.out.println("收到http请求");
-        
-        return "cloud";
-    }
-    
+
 }
