@@ -7,6 +7,9 @@
     <title>下棋界面</title>
     <script language="javascript">
     
+        // 服务端地址
+        var serverURL = "http://127.0.0.1:8080"
+        
         // 一个棋盘格子的像素大小
         var CELL_SIZE = 40;
         // 棋子图片和棋盘格子的留空大小
@@ -49,13 +52,14 @@
         // 发送请求
         function sendRequest(info, URL) {
             xmlHttpRequest.onreadystatechange = onResponse;
-            xmlHttpRequest.open("GET", URL, true);
+            xmlHttpRequest.open("POST", URL, true);
+            // xmlHttpRequest.setRequestHeader("content-type","application/x-www-form-urlencoded");
             xmlHttpRequest.send(info);
         }
         
         // 服务器端回答请求
         function onResponse() {
-            if (readyState == 4) {
+            if (xmlHttpRequest.readyState == 4) {
                 if (xmlHttpRequest.status == 200) {
                     // 成功接受数据 AI准备落子
                     
@@ -120,7 +124,7 @@
             
             setChessDownInfo((player ? "黑方" : "白方") + "落子[" + boardMarkMap[x] + (y + 1) + "]", false);
             
-            sendRequest(x * 100 + y, "ai/getNextMove");
+            sendRequest(x * 100 + y, serverURL + "/test/testGetAIMove");
             
         }
         
@@ -138,7 +142,7 @@
             var top = x * CELL_SIZE + CELL_SIZE + BLOCK_SIZE;
             var left = y * CELL_SIZE + CELL_SIZE + BLOCK_SIZE;
             
-            var chessman = "<img src=\"./images/" + pic + "style=\"position:absolute; top:" + top + "px; left:" + left + "px\" >"
+            var chessman = "<img src=\"/images/" + pic + "style=\"position:absolute; top:" + top + "px; left:" + left + "px\" >"
             
             // alert(top + "," + left + "," + chessman);
             document.getElementById("boardDiv").innerHTML += chessman;
@@ -161,7 +165,7 @@
 <body onLoad="init()">
 
     <!-- 棋盘图片 -->
-    <img id="boardImg" style="position:absolute; top:0px; left:0px" src="./images/board.jpg" onClick="userClickOnBoard(event)" alt="棋盘"/>
+    <img id="boardImg" style="position:absolute; top:0px; left:0px" src="/images/board.jpg" onClick="userClickOnBoard(event)" alt="棋盘"/>
     <!-- 棋盘div，用于落子-->
     <div id="boardDiv" style="position:absolute; top:0px; left:0px"></div>
     
