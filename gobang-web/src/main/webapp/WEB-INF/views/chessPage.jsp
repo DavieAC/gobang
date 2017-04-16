@@ -8,7 +8,9 @@
     <script language="javascript">
     
         // 服务端地址
-        var serverURL = "http://127.0.0.1:8080"
+        var serverURL = "http://127.0.0.1:8080";
+        // 获得AI落子的path
+        var getAIMovePath = "/index/getAIMove";
         
         // 一个棋盘格子的像素大小
         var CELL_SIZE = 40;
@@ -31,7 +33,6 @@
         
         // 整个前端初始化函数
         function init() {
-            
             if (window.XMLHttpRequest) {
                 // code for all new browsers
                 xmlHttpRequest = new XMLHttpRequest();
@@ -46,47 +47,20 @@
             }
             // 这里调用一个初始化值的函数(简单处理)
             startGame();
-            
-        }
-        
-        // 发送请求
-        function sendRequest(info, URL) {
-            xmlHttpRequest.onreadystatechange = onResponse;
-            xmlHttpRequest.open("POST", URL, true);
-            // xmlHttpRequest.setRequestHeader("content-type","application/x-www-form-urlencoded");
-            xmlHttpRequest.send(info);
-        }
-        
-        // 服务器端回答请求
-        function onResponse() {
-            if (xmlHttpRequest.readyState == 4) {
-                if (xmlHttpRequest.status == 200) {
-                    // 成功接受数据 AI准备落子
-                    
-                    alert("成功接受数据:" + xmlHttpRequest.responseText);
-                    // 再次等待落子
-                    ifValid = true; 
-                } else {
-                    alert("接受数据失败");
-                }
-            }
         }
         
         // 用户点击开始/重新开始按钮的时候的操作
         function startGame() {
-            
             // 重新刷新棋盘落子信息
             for (var i = 0; i < BOARD_SIZE; i++) {
                 for (var j = 0; j < BOARD_SIZE; j++) {
                     chessInfo[i][j] = 0;    
                 }
             }
-            
             // 刷新页面上所有的落子
             document.getElementById("boardDiv").innerHTML = "";
             // 刷新落子信息面板
             setChessDownInfo("", true);
-            
         }
     
         // 用户点击事件
@@ -110,22 +84,59 @@
             }
             
             // 有效落子
-            userDown(x, y, true);
-            // player = !player;
+            playerDown(x, y, true);
         }
         
         // 用户落子
-        function userDown(x, y, player) {
+        function playerDown(x, y, player) {
+            // 如果是玩家，发送落子信息,同时禁止连续落子
+            if (player) {
+            	ifValid = false;
+                sendRequest(serverURL + getAIMovePath);
+            }
             
-            // 禁止连续落子
-            ifValid = false;
-            
+            // 画出落子
             drawDown(x, y, player);
             
+            // 落子信息面板上打印出相关信息
             setChessDownInfo((player ? "黑方" : "白方") + "落子[" + boardMarkMap[x] + (y + 1) + "]", false);
             
-            sendRequest(x * 100 + y, serverURL + "/test/testGetAIMove");
+            // 记录落子信息
+            setChessInfo(x, y, player);
             
+            // AI落子后，玩家可以落子
+            if (!player) {
+            	ifValid = true;
+            }
+        }
+        
+        // 发送请求
+        function sendRequest(URL) {
+            xmlHttpRequest.onreadystatechange = onResponse;
+            xmlHttpRequest.open("POST", URL, true);
+            // 把当前棋盘落子信息发送出去
+            var info = JSON.stringify(chessInfo);
+            // alert(info);
+            xmlHttpRequest.send(info);
+        }
+        
+        // 服务器端回答请求
+        function onResponse() {
+            if (xmlHttpRequest.readyState == 4) {
+                if (xmlHttpRequest.status == 200) {
+                    // 成功接受数据 AI准备落子
+                    // alert("成功接受数据:" + xmlHttpRequest.responseText);
+                    var response = xmlHttpRequest.responseText;
+                    playerDown(parseInt(response / 10), response % 10, false);
+                } else {
+                    alert("接受数据失败");
+                }
+            }
+        }
+        
+        // player == true 黑子; player == false 白字
+        function setChessInfo(x, y, player) {
+            chessInfo[x][y] = player ? 1 : 2;           
         }
         
         // 画出落子

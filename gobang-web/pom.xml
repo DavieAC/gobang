@@ -12,11 +12,33 @@
 	<packaging>war</packaging>
 	<name>gobang-web</name>
 	<dependencies>
-	
+
 	    <!-- self -->
 		<dependency>
 			<groupId>com.jd</groupId>
 			<artifactId>gobang-service</artifactId>
+		</dependency>
+		
+		<!-- FastJSON -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+        <!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		
+		<!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		
         <!-- spring -->
@@ -34,6 +56,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- servlet API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
