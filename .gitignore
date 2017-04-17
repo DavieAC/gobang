@@ -9,8 +9,8 @@
 # WorkSpace Files#
 .classpath
 .project
-settings/*
-target/*
+**/.settings/
+**/target/
 .DS_Store
 
 .*
