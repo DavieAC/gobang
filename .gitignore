@@ -1,4 +1,4 @@
-lass Files #
+# lass Files #
 *.class
 
 # Package Files #
@@ -9,9 +9,9 @@ lass Files #
 # WorkSpace Files#
 .classpath
 .project
-.settings/*
+settings/*
 target/*
 .DS_Store
 
-# .* #
-
+.*
+!.gitignore
