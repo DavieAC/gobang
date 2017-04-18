@@ -18,7 +18,7 @@ import com.gobang.ai.ChessAI;
 @RequestMapping(value = {"/index", "/", ""})
 public class ChessPageController {
 
-    private static final Logger logger = LoggerFactory.getLogger("com.jd");
+    private static final Logger logger = LoggerFactory.getLogger(ChessPageController.class);
 
     @Resource
     private ChessAI AI;
