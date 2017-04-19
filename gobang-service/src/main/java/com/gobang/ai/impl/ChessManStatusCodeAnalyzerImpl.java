@@ -4,25 +4,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.gobang.ai.interfaces.ChessManStatusCodeAnalyzer;
+import com.gobang.constant.Constant;
 
 public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyzer {
 
     private static final Logger logger = LoggerFactory.getLogger(ChessManStatusCodeAnalyzerImpl.class);
 
-    // 棋盘上的空格标志
-    private static final int BLANK = 0;
-
-    // 棋盘上的黑子标志
-    private static final int BLACK = 1;
-
-    // 棋盘上的白字标志
-    private static final int WHITE = 2;
-
     @Override
     public int getHorizontalStatusCode(int[][] chessInfo, int x, int y) {
 
         // 先检查这个地方是否有棋子
-        if (chessInfo[x][y] == BLANK) {
+        if (chessInfo[x][y] == Constant.BLANK) {
             return 0;
         }
 
@@ -36,7 +28,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (y - i < 0 || chessInfo[x][y - i] == theOtherPlayer) { // 如果左边一位是对方棋子或者棋盘边缘
                 leftCut = true;
                 break;
-            } else if (chessInfo[x][y - i] == BLANK) { // 如果左边一位的棋子是空
+            } else if (chessInfo[x][y - i] == Constant.BLANK) { // 如果左边一位的棋子是空
                 break;
             }
             maxLength++;
@@ -46,7 +38,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (y + i > 14 || chessInfo[x][y + i] == theOtherPlayer) { // 如果左边一位是对方棋子或者棋盘边缘
                 rightCut = true;
                 break;
-            } else if (chessInfo[x][y + i] == BLANK) { // 如果左边一位的棋子是空
+            } else if (chessInfo[x][y + i] == Constant.BLANK) { // 如果左边一位的棋子是空
                 break;
             }
             maxLength++;
@@ -60,7 +52,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
     public int getVerticalStatusCode(int[][] chessInfo, int x, int y) {
 
         // 先检查这个地方是否有棋子
-        if (chessInfo[x][y] == BLANK) {
+        if (chessInfo[x][y] == Constant.BLANK) {
             return 0;
         }
 
@@ -74,7 +66,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (x - i < 0 || chessInfo[x - i][y] == theOtherPlayer) {
                 leftCut = true;
                 break;
-            } else if (chessInfo[x - i][y] == BLANK) {
+            } else if (chessInfo[x - i][y] == Constant.BLANK) {
                 break;
             }
             maxLength++;
@@ -84,7 +76,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (x + i > 14 || chessInfo[x + i][y] == theOtherPlayer) {
                 rightCut = true;
                 break;
-            } else if (chessInfo[x + i][y] == BLANK) {
+            } else if (chessInfo[x + i][y] == Constant.BLANK) {
                 break;
             }
             maxLength++;
@@ -98,7 +90,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
     public int getLeftFallingStatusCode(int[][] chessInfo, int x, int y) {
 
         // 先检查这个地方是否有棋子
-        if (chessInfo[x][y] == BLANK) {
+        if (chessInfo[x][y] == Constant.BLANK) {
             return 0;
         }
 
@@ -112,7 +104,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (x - i < 0 || y + i > 14 || chessInfo[x - i][y + i] == theOtherPlayer) {
                 leftCut = true;
                 break;
-            } else if (chessInfo[x - i][y + i] == BLANK) {
+            } else if (chessInfo[x - i][y + i] == Constant.BLANK) {
                 break;
             }
             maxLength++;
@@ -122,7 +114,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (x + i > 14 || y - i < 0 || chessInfo[x + i][y - i] == theOtherPlayer) {
                 rightCut = true;
                 break;
-            } else if (chessInfo[x + i][y - i] == BLANK) {
+            } else if (chessInfo[x + i][y - i] == Constant.BLANK) {
                 break;
             }
             maxLength++;
@@ -136,7 +128,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
     public int getRightFallingStatusCode(int[][] chessInfo, int x, int y) {
 
         // 先检查这个地方是否有棋子
-        if (chessInfo[x][y] == BLANK) {
+        if (chessInfo[x][y] == Constant.BLANK) {
             return 0;
         }
 
@@ -150,7 +142,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (x - i < 0 || y - i < 0 || chessInfo[x - i][y - i] == theOtherPlayer) {
                 leftCut = true;
                 break;
-            } else if (chessInfo[x - i][y - i] == BLANK) {
+            } else if (chessInfo[x - i][y - i] == Constant.BLANK) {
                 break;
             }
             maxLength++;
@@ -160,7 +152,7 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
             if (x + i > 14 || y + i > 14 || chessInfo[x + i][y + i] == theOtherPlayer) {
                 rightCut = true;
                 break;
-            } else if (chessInfo[x + i][y + i] == BLANK) {
+            } else if (chessInfo[x + i][y + i] == Constant.BLANK) {
                 break;
             }
             maxLength++;
@@ -206,11 +198,11 @@ public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyze
      * @return
      */
     private int getTheOtherPlayer(int player) {
-        if (player != 1 && player != 2) {
+        if (player != Constant.BLACK && player != Constant.WHITE) {
             logger.error("获得对手方状态码失败,palyer:{}", player);
             return 0;
         }
-        return player == 1 ? 2 : 1;
+        return player == Constant.BLACK ? Constant.WHITE : Constant.BLACK;
     }
 
 }
