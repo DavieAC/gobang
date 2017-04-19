@@ -1,4 +1,4 @@
-package com.gobang.ai;
+package com.gobang.ai.interfaces;
 
 public interface ChessAI {
     

@@ -1,6 +1,7 @@
 package com.jd.gobang.controllers;
 
 import javax.annotation.Resource;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.gobang.ai.ChessAI;
+import com.gobang.ai.interfaces.ChessAI;
 
 @Controller
 @RequestMapping(value = {"/index", "/", ""})
