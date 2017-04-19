@@ -9,7 +9,7 @@ package com.gobang.ai.interfaces;
  * <li>3, 断2</li>
  * <li>4, 活2</li>
  * <li>5, 断3</li>
- * <li>6, 活4</li>
+ * <li>6, 活3</li>
  * <li>7, 断4</li>
  * <li>8, 活4</li>
  * <li>9, 5子连珠</li>
