@@ -37,7 +37,7 @@ public class ChessManScoreAnalyzerImpl implements ChessManScoreAnalyzer {
             }
         }
 
-        return 0;
+        return result;
     }
 
     @Override
