@@ -9,9 +9,12 @@
     default-autowire="byName">
     
     <!-- AI的实现类 -->
-    <bean id="ChessAI" class="com.gobang.ai.impl.ChessAIImpl">  </bean>
+    <bean id="chessAI" class="com.gobang.ai.impl.ChessAIImpl">  </bean>
 
     <!-- 对单个落子各个方向的状态码的分析类 -->
-    <bean id="StatusCodeAnalyzer" class="com.gobang.ai.impl.StatusCodeAnalyzerImpl"></bean>
+    <bean id="statusCodeAnalyzer" class="com.gobang.ai.impl.StatusCodeAnalyzerImpl"></bean>
+
+    <!-- 局面评估函数 -->
+    <bean id="evaluator" class="com.gobang.ai.impl.EvaluatorImpl"></bean>
 
 </beans>
