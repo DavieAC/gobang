@@ -17,4 +17,7 @@
     <!-- 局面评估函数 -->
     <bean id="evaluator" class="com.gobang.ai.impl.EvaluatorImpl"></bean>
 
+    <!-- 递归计算左右落子函数 -->
+    <bean id="selector" class="com.gobang.ai.impl.SelectorImpl"></bean>
+
 </beans>

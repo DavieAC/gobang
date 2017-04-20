@@ -14,5 +14,16 @@ public class SelectorImpl implements Selector{
     public int getCurBestMove(int[][] chessInfo) {
         return 0;
     }
+    
+    private int getMaxScore(int[][] chessInfo, int count) {
+        
+        // 如果计算到最后一层
+        if (count == 0) {
+            return evaluator.getAllScore(chessInfo);
+        }
+        
+        return 0;
+        
+    }
 
 }
