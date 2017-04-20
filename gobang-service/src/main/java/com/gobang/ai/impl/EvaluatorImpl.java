@@ -5,16 +5,16 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gobang.ai.interfaces.ChessManScoreAnalyzer;
-import com.gobang.ai.interfaces.ChessManStatusCodeAnalyzer;
+import com.gobang.ai.interfaces.Evaluator;
+import com.gobang.ai.interfaces.StatusCodeAnalyzer;
 import com.gobang.constant.Constant;
 
-public class ChessManScoreAnalyzerImpl implements ChessManScoreAnalyzer {
+public class EvaluatorImpl implements Evaluator {
 
-    private static final Logger logger = LoggerFactory.getLogger(ChessManScoreAnalyzerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(EvaluatorImpl.class);
 
     @Resource
-    private ChessManStatusCodeAnalyzer chessManStatusCodeAnalyzer;
+    private StatusCodeAnalyzer StatusCodeAnalyzer;
 
     @Override
     public int getAllScore(int[][] chessInfo) {
@@ -50,16 +50,16 @@ public class ChessManScoreAnalyzerImpl implements ChessManScoreAnalyzer {
         }
 
         result += translateStatusCodeToScore(
-                chessManStatusCodeAnalyzer.getHorizontalStatusCode(chessInfo, x, y));
+                StatusCodeAnalyzer.getHorizontalStatusCode(chessInfo, x, y));
 
         result +=
-                translateStatusCodeToScore(chessManStatusCodeAnalyzer.getVerticalStatusCode(chessInfo, x, y));
+                translateStatusCodeToScore(StatusCodeAnalyzer.getVerticalStatusCode(chessInfo, x, y));
 
         result += translateStatusCodeToScore(
-                chessManStatusCodeAnalyzer.getLeftFallingStatusCode(chessInfo, x, y));
+                StatusCodeAnalyzer.getLeftFallingStatusCode(chessInfo, x, y));
 
         result += translateStatusCodeToScore(
-                chessManStatusCodeAnalyzer.getRightFallingStatusCode(chessInfo, x, y));
+                StatusCodeAnalyzer.getRightFallingStatusCode(chessInfo, x, y));
 
         return result;
     }

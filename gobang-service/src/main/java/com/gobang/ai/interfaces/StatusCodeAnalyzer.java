@@ -19,7 +19,7 @@ package com.gobang.ai.interfaces;
  * @version 1.0
  * @data 2017年4月19日 下午5:49:28
  */
-public interface ChessManStatusCodeAnalyzer {
+public interface StatusCodeAnalyzer {
 
     /**
      * 获得当前位置的横向连珠的状态码

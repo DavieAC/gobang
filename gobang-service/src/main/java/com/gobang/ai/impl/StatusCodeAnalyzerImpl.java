@@ -3,12 +3,12 @@ package com.gobang.ai.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gobang.ai.interfaces.ChessManStatusCodeAnalyzer;
+import com.gobang.ai.interfaces.StatusCodeAnalyzer;
 import com.gobang.constant.Constant;
 
-public class ChessManStatusCodeAnalyzerImpl implements ChessManStatusCodeAnalyzer {
+public class StatusCodeAnalyzerImpl implements StatusCodeAnalyzer {
 
-    private static final Logger logger = LoggerFactory.getLogger(ChessManStatusCodeAnalyzerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(StatusCodeAnalyzerImpl.class);
 
     @Override
     public int getHorizontalStatusCode(int[][] chessInfo, int x, int y) {
