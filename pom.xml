@@ -11,6 +11,7 @@
 	<modules>
 		<module>gobang-web</module>
 		<module>gobang-service</module>
+		<module>gobang-domain</module>
 	</modules>
 
 	<properties>
@@ -32,6 +33,12 @@
 				<artifactId>gobang-service</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>com.jd</groupId>
+				<artifactId>gobang-domain</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			
 			
 			<!-- log4j -->
 			<dependency>
@@ -90,7 +97,7 @@
 				<version>2.5</version>
 				<scope>provided</scope>
 			</dependency>
-			
+
 		</dependencies>
 	</dependencyManagement>
 

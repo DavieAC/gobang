@@ -8,33 +8,12 @@
 		<artifactId>gobang</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>gobang-service</artifactId>
-	<name>gobang-service</name>
+	<artifactId>gobang-domain</artifactId>
+	<name>gobang-domain</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-        <!-- domain层依赖 -->
-		<dependency>
-			<groupId>com.jd</groupId>
-			<artifactId>gobang-domain</artifactId>
-		</dependency>
-	
-	    <!-- log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-        
-        <!-- slf4j -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
 	</dependencies>
 </project>
