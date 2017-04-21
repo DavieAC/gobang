@@ -19,5 +19,8 @@
 
     <!-- 递归计算左右落子函数 -->
     <bean id="selector" class="com.gobang.ai.impl.SelectorImpl"></bean>
+    
+    <!-- 在一个棋局上挑选有意义的落子的挑选器 -->
+    <bean id="movePicker" class="com.gobang.ai.impl.MovePickerImpl"></bean>
 
 </beans>
