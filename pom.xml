@@ -12,6 +12,7 @@
 		<module>gobang-web</module>
 		<module>gobang-service</module>
 		<module>gobang-domain</module>
+		<module>gobang-common</module>
 	</modules>
 
 	<properties>
@@ -23,6 +24,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- self -->
+			<dependency>
+				<groupId>com.jd</groupId>
+				<artifactId>gobang-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>com.jd</groupId>
 				<artifactId>gobang-web</artifactId>

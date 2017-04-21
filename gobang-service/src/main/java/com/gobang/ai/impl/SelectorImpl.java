@@ -1,11 +1,14 @@
 package com.gobang.ai.impl;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 
 import com.gobang.ai.interfaces.Evaluator;
 import com.gobang.ai.interfaces.MovePicker;
 import com.gobang.ai.interfaces.Selector;
 import com.gobang.domain.ai.BestMove;
+import com.gobang.domain.ai.Move;
 
 public class SelectorImpl implements Selector {
 
@@ -30,6 +33,13 @@ public class SelectorImpl implements Selector {
             return curBestMove.setScore(evaluator.getAllScore(chessInfo));
         }
 
+        // 开始遍历所有有意义的落子
+        ArrayList<Move> moves = movePicker.getValuableMove(chessInfo);
+        for (Move move : moves) {
+            
+            evaluator.getAllScore(chessInfo);
+        }
+        
         return curBestMove;
 
     }
