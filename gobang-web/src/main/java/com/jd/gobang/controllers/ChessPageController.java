@@ -23,7 +23,7 @@ public class ChessPageController {
 
     @Resource
     private ChessAI AI;
-    
+
     /**
      * 落子响应接口，接受前端传来的JSON化的棋局信息，计算出最佳落子，然后返回给前端
      * 
@@ -32,19 +32,19 @@ public class ChessPageController {
      */
     @ResponseBody
     @RequestMapping("getAIMove")
-    public String getAIMove(@RequestBody String chessInfo) {
+    public String getAIMove(@RequestBody String chess) {
 
         try {
             // 首先还原前端传过来的棋局信息
-            int[][] chess = JSON.parseObject(chessInfo, int[][].class);
-            
-            if (chess == null) {
+            int[][] chessInfo = JSON.parseObject(chess, int[][].class);
+
+            if (chessInfo == null) {
                 logger.error("前端chessInfo传来为null");
                 return "";
             }
-            
+
             // 在这里进行AI运算出最优落子
-            return String.valueOf(AI.getAIMove(chess));
+            return String.valueOf(AI.getAIMove(chessInfo));
         } catch (Exception e) {
             logger.error("计算AI落子controller层异常,e:{}", e);
             return "";

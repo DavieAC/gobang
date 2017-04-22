@@ -89,11 +89,6 @@
         
         // 用户落子
         function playerDown(x, y, player) {
-            // 如果是玩家，发送落子信息,同时禁止连续落子
-            if (player) {
-            	ifValid = false;
-                sendRequest(serverURL + getAIMovePath);
-            }
             
             // 画出落子
             drawDown(x, y, player);
@@ -104,10 +99,14 @@
             // 记录落子信息
             setChessInfo(x, y, player);
             
-            // AI落子后，玩家可以落子
-            if (!player) {
+            // 如果是玩家，发送落子信息,同时禁止连续落子
+            if (player) {
+                ifValid = false;
+                sendRequest(serverURL + getAIMovePath);
+            } else { // AI落子后，玩家可以落子
             	ifValid = true;
             }
+            
         }
         
         // 发送请求

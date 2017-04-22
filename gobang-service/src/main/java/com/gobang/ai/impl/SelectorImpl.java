@@ -26,11 +26,7 @@ public class SelectorImpl implements Selector {
     private MovePicker movePicker;
 
     @Override
-    public int getCurBestMove(int[][] chessInfo) {
-        return 0;
-    }
-
-    private Move getMaxScore(int[][] chessInfo, int count) {
+    public Move getMaxScore(int[][] chessInfo, int count) {
 
         // 用来记录当前层的最佳落子
         Move curBestMove = new Move();
@@ -65,7 +61,8 @@ public class SelectorImpl implements Selector {
         return curBestMove;
     }
 
-    private Move getMinScore(int[][] chessInfo, int count) {
+    @Override
+    public Move getMinScore(int[][] chessInfo, int count) {
 
         // 用来记录当前层的最佳落子
         Move curBestMove = new Move();
