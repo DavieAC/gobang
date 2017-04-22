@@ -14,12 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.gobang.ai.interfaces.ChessAI;
+import com.gobang.ai.interfaces.Evaluator;
+import com.gobang.constant.Constant;
+import com.gobang.domain.ai.Move;
 
 @Controller
 @RequestMapping(value = {"/index", "/", ""})
 public class ChessPageController {
 
     private static final Logger logger = LoggerFactory.getLogger(ChessPageController.class);
+
+    @Resource
+    private Evaluator evaluator;
 
     @Resource
     private ChessAI AI;
@@ -43,8 +49,18 @@ public class ChessPageController {
                 return "";
             }
 
-            // 在这里进行AI运算出最优落子
-            return String.valueOf(AI.getAIMove(chessInfo));
+            // 检查黑子是否已经获胜
+            if (evaluator.isWin(chessInfo, Constant.BLACK)) {
+                return Constant.BLACK + "|";
+            }
+
+            Move move = AI.getAIMove(chessInfo);
+
+            if (evaluator.isWinWith(chessInfo, Constant.WHITE, move.getX(), move.getY())) {
+                return Constant.WHITE + "|" + move.toInfoString();
+            } else {
+                return Constant.BLANK + "|" + move.toInfoString();
+            }
         } catch (Exception e) {
             logger.error("计算AI落子controller层异常,e:{}", e);
             return "";

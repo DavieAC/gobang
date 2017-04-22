@@ -31,6 +31,10 @@ public class Move {
         this.y = y;
         this.score = score;
     }
+    
+    public String toInfoString() {
+        return String.valueOf(x * 100 + y);
+    }
 
     public int getX() {
         return x;

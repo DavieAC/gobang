@@ -18,9 +18,8 @@ public class ChessAIImpl implements ChessAI {
     Selector selector;
 
     @Override
-    public int getAIMove(int[][] chessInfo) {
-        Move AIMove = selector.getMinScore(chessInfo, 2);
-        return AIMove.getX() * 100 + AIMove.getY();
+    public Move getAIMove(int[][] chessInfo) {
+        return selector.getMinScore(chessInfo, 4);
     }
 
 }

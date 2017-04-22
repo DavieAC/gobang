@@ -18,6 +18,12 @@
         var BLOCK_SIZE = 5;
         // 棋盘的大小
         var BOARD_SIZE = 15;
+        // 空标志
+        var BLANK = 0;
+        // 黑子标志
+        var BLACK = 1;
+        // 白子标志
+        var WHITE = 2;
         
         // 此时能否落子（控制量）
         var ifValid = true;
@@ -54,13 +60,15 @@
             // 重新刷新棋盘落子信息
             for (var i = 0; i < BOARD_SIZE; i++) {
                 for (var j = 0; j < BOARD_SIZE; j++) {
-                    chessInfo[i][j] = 0;    
+                    chessInfo[i][j] = BLANK;    
                 }
             }
             // 刷新页面上所有的落子
             document.getElementById("boardDiv").innerHTML = "";
             // 刷新落子信息面板
             setChessDownInfo("", true);
+            // 可以重新开始落子
+            ifValid = true;
         }
     
         // 用户点击事件
@@ -79,12 +87,12 @@
             y = parseInt((y - CELL_SIZE) / CELL_SIZE);
             
             // 如果已经落子
-            if (chessInfo[x][y] != 0) {
+            if (chessInfo[x][y] != BLANK) {
                 return ;
             }
             
             // 有效落子
-            playerDown(x, y, true);
+            playerDown(x, y, BLACK);
         }
         
         // 用户落子
@@ -94,19 +102,16 @@
             drawDown(x, y, player);
             
             // 落子信息面板上打印出相关信息
-            setChessDownInfo((player ? "黑方" : "白方") + "落子[" + boardMarkMap[x] + (y + 1) + "]", false);
+            setChessDownInfo((player == BLACK ? "黑方" : "白方") + "落子[" + boardMarkMap[x] + (y + 1) + "]", false);
             
             // 记录落子信息
             setChessInfo(x, y, player);
             
             // 如果是玩家，发送落子信息,同时禁止连续落子
-            if (player) {
+            if (player == BLACK) {
                 ifValid = false;
                 sendRequest(serverURL + getAIMovePath);
-            } else { // AI落子后，玩家可以落子
-            	ifValid = true;
             }
-            
         }
         
         // 发送请求
@@ -124,25 +129,33 @@
             if (xmlHttpRequest.readyState == 4) {
                 if (xmlHttpRequest.status == 200) {
                     // 成功接受数据 AI准备落子
-                    // alert("成功接受数据:" + xmlHttpRequest.responseText);
-                    var response = xmlHttpRequest.responseText;
-                    playerDown(parseInt(response / 100), response % 100, false);
+                    var response = xmlHttpRequest.responseText.split("|");
+                    
+                    if (response[0] == BLACK) { // 黑胜
+                    	alert("黑方获胜");
+                    } else if (response[0] == WHITE) { // 白胜
+                    	playerDown(parseInt(response[1] / 100), response[1] % 100, WHITE);
+                    	alert("白方获胜");
+                    } else {
+                    	playerDown(parseInt(response[1] / 100), response[1] % 100, WHITE);
+                    	ifValid = true; // 修改为可以继续落子
+                    }
                 } else {
                     alert("接受数据失败");
                 }
             }
         }
         
-        // player == true 黑子; player == false 白字
+        // player == 1 黑子; player == 2 白子
         function setChessInfo(x, y, player) {
-            chessInfo[x][y] = player ? 1 : 2;           
+            chessInfo[x][y] = player;           
         }
         
         // 画出落子
         function drawDown(x, y, player) {
             
             // 判断黑白
-            if (player == true) {
+            if (player == BLACK) {
                 var pic = "black.jpg\" ";
             } else {
                 var pic = "write.jpg\" ";

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.gobang.ai.interfaces.Evaluator;
 import com.gobang.ai.interfaces.StatusCodeAnalyzer;
 import com.gobang.constant.Constant;
+import com.gobang.tools.ArrayTool;
 
 public class EvaluatorImpl implements Evaluator {
 
@@ -15,6 +16,33 @@ public class EvaluatorImpl implements Evaluator {
 
     @Resource
     private StatusCodeAnalyzer StatusCodeAnalyzer;
+
+    @Override
+    public boolean isWin(int[][] chessInfo, int player) {
+        for (int i = 0; i < Constant.BOARD_SIZE; i++) {
+            for (int j = 0; j < Constant.BOARD_SIZE; j++) {
+                if (chessInfo[i][j] == player) {
+                    if (StatusCodeAnalyzer.getHorizontalStatusCode(chessInfo, i, j) == 9
+                            || StatusCodeAnalyzer.getVerticalStatusCode(chessInfo, i, j) == 9
+                            || StatusCodeAnalyzer.getLeftFallingStatusCode(chessInfo, i, j) == 9
+                            || StatusCodeAnalyzer.getRightFallingStatusCode(chessInfo, i, j) == 9) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean isWinWith(int[][] chessInfo, int player, int x, int y) {
+        
+        int[][] newChessInfo = ArrayTool.copyOf(chessInfo);
+        
+        newChessInfo[x][y] = player;
+        
+        return isWin(newChessInfo, player);
+    }
 
     @Override
     public int getAllScore(int[][] chessInfo) {
@@ -49,17 +77,13 @@ public class EvaluatorImpl implements Evaluator {
             return result;
         }
 
-        result += translateStatusCodeToScore(
-                StatusCodeAnalyzer.getHorizontalStatusCode(chessInfo, x, y));
+        result += translateStatusCodeToScore(StatusCodeAnalyzer.getHorizontalStatusCode(chessInfo, x, y));
 
-        result +=
-                translateStatusCodeToScore(StatusCodeAnalyzer.getVerticalStatusCode(chessInfo, x, y));
+        result += translateStatusCodeToScore(StatusCodeAnalyzer.getVerticalStatusCode(chessInfo, x, y));
 
-        result += translateStatusCodeToScore(
-                StatusCodeAnalyzer.getLeftFallingStatusCode(chessInfo, x, y));
+        result += translateStatusCodeToScore(StatusCodeAnalyzer.getLeftFallingStatusCode(chessInfo, x, y));
 
-        result += translateStatusCodeToScore(
-                StatusCodeAnalyzer.getRightFallingStatusCode(chessInfo, x, y));
+        result += translateStatusCodeToScore(StatusCodeAnalyzer.getRightFallingStatusCode(chessInfo, x, y));
 
         return result;
     }

@@ -27,5 +27,20 @@ public interface Evaluator {
      * @return
      */
     public int getAllScore(int[][] chessInfo);
+    
+    /**
+     * 判断是否产生了赢家
+     * @param chessInfo
+     * @return
+     */
+    public boolean isWin(int[][] chessInfo, int player);
+    
+    /**
+     * 判断加上这个落子之后是不是赢了
+     * @param chessInfo
+     * @param player
+     * @return
+     */
+    public boolean isWinWith(int[][] chessInfo, int player, int x, int y);
 
 }
