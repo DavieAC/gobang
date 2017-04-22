@@ -126,7 +126,7 @@
                     // 成功接受数据 AI准备落子
                     // alert("成功接受数据:" + xmlHttpRequest.responseText);
                     var response = xmlHttpRequest.responseText;
-                    playerDown(parseInt(response / 10), response % 10, false);
+                    playerDown(parseInt(response / 100), response % 100, false);
                 } else {
                     alert("接受数据失败");
                 }

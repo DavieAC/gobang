@@ -33,6 +33,11 @@ public class MovePickerImpl implements MovePicker {
      * @return
      */
     private boolean isValuableMove(int[][] chessInfo, int x, int y) {
+        
+        // 如果当前位置有落子则直接返回false
+        if (chessInfo[x][y] != 0) {
+            return false;
+        }
 
         // 左上还在棋盘内
         if (x - 1 >= 0 && y - 1 >= 0) {
@@ -89,6 +94,7 @@ public class MovePickerImpl implements MovePicker {
                 return true;
             }
         }
+        
         return false;
     }
 

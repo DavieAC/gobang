@@ -48,7 +48,7 @@ public class SelectorImpl implements Selector {
 
             Move nextBesMove = getMinScore(newChessInfo, count - 1);
             if (nextBesMove.getScore() > curMaxScore) {
-                curMaxScore = move.getScore();
+                curMaxScore = nextBesMove.getScore();
 
                 curBestMove.setX(move.getX());
                 curBestMove.setY(move.getY());
@@ -84,7 +84,7 @@ public class SelectorImpl implements Selector {
 
             Move nextBesMove = getMaxScore(newChessInfo, count - 1);
             if (nextBesMove.getScore() < curMinScore) {
-                curMinScore = move.getScore();
+                curMinScore = nextBesMove.getScore();
 
                 curBestMove.setX(move.getX());
                 curBestMove.setY(move.getY());
