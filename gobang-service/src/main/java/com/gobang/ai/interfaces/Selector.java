@@ -19,7 +19,7 @@ public interface Selector {
      * @param count 递归层数
      * @return Move对象，表示了最优落子
      */
-    public Move getMaxScore(int[][] chessInfo, int count);
+    public Move getMaxScore(int[][] chessInfo, int count, int minScore);
 
     /**
      * Min方法，在博弈树中寻找Min层最优落子
@@ -28,6 +28,6 @@ public interface Selector {
      * @param count 递归层数
      * @return Move对象，表示了最优落子
      */
-    public Move getMinScore(int[][] chessInfo, int count);
+    public Move getMinScore(int[][] chessInfo, int count, int maxScore);
 
 }

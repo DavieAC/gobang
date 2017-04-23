@@ -26,7 +26,7 @@ public class SelectorImpl implements Selector {
     private MovePicker movePicker;
 
     @Override
-    public Move getMaxScore(int[][] chessInfo, int count) {
+    public Move getMaxScore(int[][] chessInfo, int count, int minScore) {
 
         // 用来记录当前层的最佳落子
         Move curBestMove = new Move();
@@ -46,7 +46,19 @@ public class SelectorImpl implements Selector {
             // 在新的棋局上落子
             newChessInfo[move.getX()][move.getY()] = Constant.BLACK;
 
-            Move nextBesMove = getMinScore(newChessInfo, count - 1);
+            Move nextBesMove = getMinScore(newChessInfo, count - 1, curMaxScore);
+
+            // 还原
+            newChessInfo[move.getX()][move.getY()] = Constant.BLANK;
+
+            // α剪枝
+            if (nextBesMove.getScore() >= minScore) {
+                curBestMove.setX(move.getX());
+                curBestMove.setY(move.getY());
+                curBestMove.setScore(nextBesMove.getScore());
+                break;
+            }
+
             if (nextBesMove.getScore() > curMaxScore) {
                 curMaxScore = nextBesMove.getScore();
 
@@ -55,14 +67,12 @@ public class SelectorImpl implements Selector {
                 curBestMove.setScore(nextBesMove.getScore());
             }
 
-            // 还原
-            newChessInfo[move.getX()][move.getY()] = Constant.BLANK;
         }
         return curBestMove;
     }
 
     @Override
-    public Move getMinScore(int[][] chessInfo, int count) {
+    public Move getMinScore(int[][] chessInfo, int count, int maxScore) {
 
         // 用来记录当前层的最佳落子
         Move curBestMove = new Move();
@@ -82,7 +92,19 @@ public class SelectorImpl implements Selector {
             // 在新的棋局上落子
             newChessInfo[move.getX()][move.getY()] = Constant.WHITE;
 
-            Move nextBesMove = getMaxScore(newChessInfo, count - 1);
+            Move nextBesMove = getMaxScore(newChessInfo, count - 1, curMinScore);
+
+            // 还原
+            newChessInfo[move.getX()][move.getY()] = Constant.BLANK;
+
+            // β剪枝
+            if (nextBesMove.getScore() <= maxScore) {
+                curBestMove.setX(move.getX());
+                curBestMove.setY(move.getY());
+                curBestMove.setScore(nextBesMove.getScore());
+                break;
+            }
+
             if (nextBesMove.getScore() < curMinScore) {
                 curMinScore = nextBesMove.getScore();
 
@@ -91,8 +113,6 @@ public class SelectorImpl implements Selector {
                 curBestMove.setScore(nextBesMove.getScore());
             }
 
-            // 还原
-            newChessInfo[move.getX()][move.getY()] = Constant.BLANK;
         }
         return curBestMove;
     }

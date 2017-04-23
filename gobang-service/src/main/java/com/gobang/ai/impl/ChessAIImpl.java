@@ -19,7 +19,7 @@ public class ChessAIImpl implements ChessAI {
 
     @Override
     public Move getAIMove(int[][] chessInfo) {
-        return selector.getMinScore(chessInfo, 4);
+        return selector.getMinScore(chessInfo, 4, Integer.MIN_VALUE);
     }
 
 }
