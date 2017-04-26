@@ -8,38 +8,35 @@
 		<artifactId>gobang</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>gobang-service</artifactId>
-	<name>gobang-service</name>
+	<artifactId>gobang-dao</artifactId>
+	<name>gobang-dao</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-        <!-- domain层依赖 -->
+	    <!-- Domain层依赖 -->
 		<dependency>
 			<groupId>com.jd</groupId>
 			<artifactId>gobang-domain</artifactId>
 		</dependency>
-		<!-- common层依赖 -->
-		<dependency>
-			<groupId>com.jd</groupId>
-			<artifactId>gobang-common</artifactId>
-		</dependency>
 		
-	    <!-- log4j -->
+		<!-- MyBatis -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
 		</dependency>
         
-        <!-- slf4j -->
+        <!-- MySQL -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+        
+        <!-- MyBatis-Spring -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
 		</dependency>
 	</dependencies>
 </project>
