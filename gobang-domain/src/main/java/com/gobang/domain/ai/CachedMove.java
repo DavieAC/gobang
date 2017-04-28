@@ -1,7 +1,7 @@
 package com.gobang.domain.ai;
 
 /**
- * 缓存的数据模型。用于缓存一个局面的计算过的最优解
+ * 缓存的数据模型实体类。用于缓存一个局面的计算过的最优解
  * 
  * @copyright Copyright 2016-2017 JD.COM All Right Reserved
  * @author 戴时机 部门：营销创新部-智能营销研发部
@@ -18,7 +18,7 @@ public class CachedMove {
     /**
      * 一个局面的hash值，唯一确定一种棋局
      */
-    private String HashCode;
+    private String hashcode;
 
     /**
      * 缓存的最优解的x坐标
@@ -38,12 +38,12 @@ public class CachedMove {
         this.id = id;
     }
 
-    public String getHashCode() {
-        return HashCode;
+    public String gethashcode() {
+        return hashcode;
     }
 
-    public void setHashCode(String hashCode) {
-        HashCode = hashCode;
+    public void sethashcode(String hashcode) {
+        this.hashcode = hashcode;
     }
 
     public int getX() {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CachedMove">
+
+    <!-- 根据ID精确查找缓存 -->
+	<select id="getCachedMoveByID" parameterType="int" resultType="CachedMove">
+        select 
+            id, hashcode, x, y
+        from
+            CachedMove t
+        where
+            t.id = #{id}
+        limit
+            1
+	</select>
+	
+	<!-- 根据hashcode精确查找缓存 -->
+    <select id="getCachedMoveByHashcode" parameterType="String" resultType="CachedMove">
+        select
+            id, hashcode, x, y
+        from
+            CachedMove t
+        where
+            t.hashcode = #{hashcode}
+    </select>
+    
+    <!-- 插入缓存记录到数据库中 -->
+    <insert id="insertCachedMove" parameterType="CachedMove">
+        insert into
+            CachedMove(id, hashcode, x, y)
+        values
+            (#{id}, #{hashcode}, #{x}, #{y})
+    </insert>
+    
+    <!-- 更新缓存记录 -->
+    <update id="updateCachedMove" parameterType="CachedMove">
+        update
+            CachedMove
+        set
+            x = #{x}, y = #{y}
+        where
+            hashcode = #{hashcode}
+    </update>
+    
+    <!-- 删除缓存记录 -->
+    <delete id="deleteCachedMove" parameterType="CachedMove">
+        delete from
+            CachedMove
+        where
+            hashcode = #{hashcode}
+    </delete>
+    
+    <!-- 计算当前记录个数 -->
+    <select id="countCachedMove">
+        select 
+            count(1)
+        from
+            CachedMove    
+    </select>
+
+</mapper>
