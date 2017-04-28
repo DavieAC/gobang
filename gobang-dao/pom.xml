@@ -39,10 +39,20 @@
 			<artifactId>mybatis-spring</artifactId>
 		</dependency>
 		
-		<!-- commons-logging junit使用 -->
+		<!-- log4j -->
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+            
+        <!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		
 		<!-- log4j -->

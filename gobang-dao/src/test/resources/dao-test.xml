@@ -8,26 +8,28 @@
             http://www.springframework.org/schema/context/spring-context.xsd
             http://jsf.jd.com/schema/jsf http://jsf.jd.com/schema/jsf/jsf.xsd"
 	default-autowire="byName">
-
+	
     <!-- Dao层实现类 -->
 	<bean id="cachedMoveDao" class="com.gobang.dao.cachedmove.impl.CachedMoveDaoImpl" />
 
     <!-- 数据源 -->
-    <bean id="gobangDataSource"
-        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/gobang?username=root&password=davie&useUnicode=true&characterEncoding=UTF-8" />
-    </bean>
+	<bean id="gobangDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://127.0.0.1:3306/gobang?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false" />
+		<property name="username" value="root" />
+		<property name="password" value="davie" />
+	</bean>
 
     <!-- sqlSession工厂Bean -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis-config.xml" />
-        <property name="dataSource" ref="gobangDataSource" />
-    </bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="dataSource" ref="gobangDataSource" />
+	</bean>
 
     <!-- sqlSession Bean -->
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
-    </bean>
-
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
 </beans>

@@ -1,15 +1,18 @@
 package com.gobang.dao.test;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gobang.dao.cachedmove.interfaces.CachedMoveDao;
+import com.gobang.domain.ai.CachedMove;
 
 
 
@@ -24,21 +27,56 @@ import com.gobang.dao.cachedmove.interfaces.CachedMoveDao;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:dao-test.xml")
 public class DaoTest {
-    
-    private static Log log = LogFactory.getLog(DaoTest.class);
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(DaoTest.class);
+
     @Resource
     private CachedMoveDao cachedMoveDao;
-    
+
     @Test
     public void testInsert() {
-        log.info("开始测试");
-        log.info("测试结束");
+        CachedMove move = new CachedMove();
+        move.sethashcode("12345");
+        move.setX(3);
+        move.setY(7);
+        cachedMoveDao.insertCachedMove(move);
+    }
+
+    @Test
+    public void testDelete() {
+        CachedMove cachedMove = new CachedMove();
+        cachedMove.sethashcode("12345");
+        cachedMove.setX(3);
+        cachedMove.setY(7);
+        cachedMoveDao.deleteCachedMove(cachedMove);
     }
     
     @Test
+    public void testGetCachedMove() {
+        CachedMove cachedMove = cachedMoveDao.getCachedMoveByID(3);
+        logger.info(cachedMove.gethashcode() + "," + cachedMove.getX() + "," + cachedMove.getY());
+    
+        List<CachedMove> cachedMoves = cachedMoveDao.getCachedMoveByHashcode("0112300123");
+        logger.info(cachedMoves.get(0).gethashcode() + "," + cachedMoves.get(0).getX() + "," + cachedMoves.get(0).getY());
+    }
+    
+    @Test
+    public void testUpdateCachedMove() {
+        CachedMove cachedMove = cachedMoveDao.getCachedMoveByID(3);
+        cachedMove.setX(0);
+        cachedMove.setY(9);
+        cachedMoveDao.updateCachedMove(cachedMove);
+    }
+    
+    @Test
+    public void testCountCachedMove() {
+        logger.info(cachedMoveDao.countCachedMove() + "");
+    }
+
+
+    @Test
     public void testLog() {
-        log.info("测试日志");
+        logger.info("testLog");
     }
 
 }
