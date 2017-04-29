@@ -4,7 +4,8 @@
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd "
+	default-autowire="byName">
 
     <!-- 读取配置文件 -->
 	<context:property-placeholder
@@ -19,12 +20,6 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-    <!-- 事务管理 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
     <!-- sqlSession工厂Bean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
@@ -35,10 +30,8 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-
-	<!-- <bean id="studentMapper" class="org.mybatis.spring.MapperFactoryBean">
-		<property name="mapperInterface" value="com.manager.data.StudentMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean> -->
+	
+	<!-- Dao Bean -->
+	<bean id="cachedMoveDao" class="com.gobang.dao.cachedmove.impl.CachedMoveDaoImpl" />
 
 </beans>

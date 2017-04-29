@@ -14,8 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gobang.dao.cachedmove.interfaces.CachedMoveDao;
 import com.gobang.domain.ai.CachedMove;
 
-
-
 /**
  * Dao层测试类
  * 
@@ -36,7 +34,7 @@ public class DaoTest {
     @Test
     public void testInsert() {
         CachedMove move = new CachedMove();
-        move.sethashcode("12345");
+        move.sethashcode("2222");
         move.setX(3);
         move.setY(7);
         cachedMoveDao.insertCachedMove(move);
@@ -56,15 +54,17 @@ public class DaoTest {
         CachedMove cachedMove = cachedMoveDao.getCachedMoveByID(3);
         logger.info(cachedMove.gethashcode() + "," + cachedMove.getX() + "," + cachedMove.getY());
     
-        List<CachedMove> cachedMoves = cachedMoveDao.getCachedMoveByHashcode("0112300123");
+        List<CachedMove> cachedMoves = cachedMoveDao.getCachedMoveByHashcode("123");
         logger.info(cachedMoves.get(0).gethashcode() + "," + cachedMoves.get(0).getX() + "," + cachedMoves.get(0).getY());
     }
     
     @Test
     public void testUpdateCachedMove() {
-        CachedMove cachedMove = cachedMoveDao.getCachedMoveByID(3);
-        cachedMove.setX(0);
-        cachedMove.setY(9);
+        CachedMove cachedMove = new CachedMove();//cachedMoveDao.getCachedMoveByID(3);
+        cachedMove.setId(3);
+        cachedMove.sethashcode("123");
+        cachedMove.setX(123);
+        cachedMove.setY(123);
         cachedMoveDao.updateCachedMove(cachedMove);
     }
     
@@ -72,7 +72,6 @@ public class DaoTest {
     public void testCountCachedMove() {
         logger.info(cachedMoveDao.countCachedMove() + "");
     }
-
 
     @Test
     public void testLog() {

@@ -18,6 +18,10 @@
 			<groupId>com.jd</groupId>
 			<artifactId>gobang-service</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>com.jd</groupId>
+            <artifactId>gobang-dao</artifactId>
+        </dependency>
 		
 		<!-- FastJSON -->
 		<dependency>

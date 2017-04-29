@@ -11,6 +11,18 @@ import com.gobang.domain.ai.Move;
  * @data 2017年4月23日 下午10:15:11
  */
 public interface MoveCache {
+    
+    /**
+     * 插入一条缓存
+     * @return
+     */
+    public boolean insertCachedMove(int x, int y, int[][] chessInfo);
+    
+    /**
+     * 删除一条缓存
+     * @return
+     */
+    public boolean deleteCachedMove(int[][] chessInfo);
 
     /**
      * 获得这个局面对应的缓存数据
@@ -18,17 +30,7 @@ public interface MoveCache {
      * @param chessInfo
      * @return 已经计算过的move null 如果没有缓存
      */
-    public Move getCacheMove(int[][] chessInfo);
-
-    /**
-     * 写入缓存
-     * 
-     * @param chessInfo
-     * @param x
-     * @param y
-     * @return
-     */
-    public Boolean setCacheMove(int[][] chessInfo, int x, int y);
+    public Move getCachedMove(int[][] chessInfo);
 
 }
 

@@ -39,29 +39,35 @@ public class CachedMoveDaoImpl implements CachedMoveDao {
     }
 
     @Override
-    public void insertCachedMove(CachedMove cachedMove) {
+    public boolean insertCachedMove(CachedMove cachedMove) {
         try {
             sqlSession.insert("CachedMove.insertCachedMove", cachedMove);
+            return true;
         } catch (Exception e) {
             logger.error("插入落子缓存DAO层失败,e:{}", e);
+            return false;
         }
     }
 
     @Override
-    public void updateCachedMove(CachedMove cachedMove) {
+    public boolean updateCachedMove(CachedMove cachedMove) {
         try {
             sqlSession.update("CachedMove.updateCachedMove", cachedMove);
+            return true;
         } catch (Exception e) {
             logger.error("更新落子缓存DAO层失败,e:{}", e);
+            return false;
         }
     }
 
     @Override
-    public void deleteCachedMove(CachedMove cachedMove) {
+    public boolean deleteCachedMove(CachedMove cachedMove) {
         try {
             sqlSession.delete("CachedMove.deleteCachedMove", cachedMove);
+            return true;
         } catch (Exception e) {
             logger.error("删除落子缓存DAO层失败,e:{}", e);
+            return false;
         }
     }
 
@@ -70,6 +76,7 @@ public class CachedMoveDaoImpl implements CachedMoveDao {
         try {
             return sqlSession.selectOne("CachedMove.countCachedMove");
         } catch (Exception e) {
+            logger.error("查询落子缓存个数DAO层失败,e:{}", e);
             return -1;
         }
     }

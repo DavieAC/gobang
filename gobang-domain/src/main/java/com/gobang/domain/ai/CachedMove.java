@@ -29,7 +29,26 @@ public class CachedMove {
      * 缓存的最优解的y坐标
      */
     private int y;
+    
+    public CachedMove() {
+        
+    }
 
+    public CachedMove(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public CachedMove(String hashcode) {
+        this.hashcode = hashcode;
+    }
+    
+    public CachedMove(int x, int y, String hashcode) {
+        this.x = x;
+        this.y = y;
+        this.hashcode = hashcode;
+    }
+    
     public int getId() {
         return id;
     }

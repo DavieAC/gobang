@@ -35,21 +35,21 @@ public interface CachedMoveDao {
      * 
      * @param cachedMove
      */
-    public void insertCachedMove(CachedMove cachedMove);
+    public boolean insertCachedMove(CachedMove cachedMove);
 
     /**
      * 更新一个落子缓存到数据库
      * 
      * @param cachedMove
      */
-    public void updateCachedMove(CachedMove cachedMove);
+    public boolean updateCachedMove(CachedMove cachedMove);
 
     /**
-     * 删除一个落子缓存到数据库
+     * 删除一个落子缓存
      * 
      * @param cachedMove
      */
-    public void deleteCachedMove(CachedMove cachedMove);
+    public boolean deleteCachedMove(CachedMove cachedMove);
 
     /**
      * 计算数据库中目前有多少缓存

@@ -20,7 +20,12 @@
 			<groupId>com.jd</groupId>
 			<artifactId>gobang-domain</artifactId>
 		</dependency>
-		
+		<!-- common层依赖 -->
+		<dependency>
+            <groupId>com.jd</groupId>
+            <artifactId>gobang-common</artifactId>
+        </dependency>
+        
 		<!-- MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
