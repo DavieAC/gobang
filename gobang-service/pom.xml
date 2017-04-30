@@ -25,6 +25,11 @@
 			<groupId>com.jd</groupId>
 			<artifactId>gobang-common</artifactId>
 		</dependency>
+		<!-- dao层依赖 -->
+        <dependency>
+            <groupId>com.jd</groupId>
+            <artifactId>gobang-dao</artifactId>
+        </dependency>
 		
 	    <!-- log4j -->
 		<dependency>
