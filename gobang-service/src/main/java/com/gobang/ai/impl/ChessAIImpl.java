@@ -15,10 +15,10 @@ public class ChessAIImpl implements ChessAI {
     private static final Logger logger = LoggerFactory.getLogger(ChessAIImpl.class);
 
     @Resource
-    Selector selector;
+    private Selector selector;
 
     @Resource
-    MoveCache moveCache;
+    private MoveCache moveCache;
 
     @Override
     public Move getAIMove(int[][] chessInfo) {
